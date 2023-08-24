@@ -121,13 +121,13 @@ def revoke_token():
 
 
 @bp.route('/api/me', methods=['GET'])
-@require_oauth('access')
+@require_oauth('profile')
 def me():
     user = current_token.user
     return jsonify(id=user.id, username=user.username)
 
 @bp.route('/api/items/buy', methods=['POST'])
-@require_oauth('access')
+@require_oauth('buy')
 def buy():
     item_id = request.form.get('item_id')
     tx_id = request.form.get('tx_id')
@@ -138,7 +138,7 @@ def buy():
     return jsonify(code=0, msg='購買成功', data=None, ts=int(time.time()))
 
 @bp.route('/api/items', methods=['GET'])
-@require_oauth('access')
+@require_oauth('buy_history')
 def history():
     start_at = request.form.get('start_at')
     end_at = request.form.get('end_at')
