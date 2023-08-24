@@ -1,4 +1,4 @@
-import time
+import time, json
 from flask import Blueprint, request, session, url_for
 from flask import render_template, redirect, jsonify
 from werkzeug.security import gen_salt
@@ -121,13 +121,13 @@ def revoke_token():
 
 
 @bp.route('/api/me', methods=['GET'])
-@require_oauth('profile')
-def api_me():
+@require_oauth('access')
+def me():
     user = current_token.user
     return jsonify(id=user.id, username=user.username)
 
 @bp.route('/api/items/buy', methods=['POST'])
-@require_oauth('profile')
+@require_oauth('access')
 def buy():
     item_id = request.form.get('item_id')
     tx_id = request.form.get('tx_id')
@@ -135,15 +135,10 @@ def buy():
 
     # 購買品項羅輯
 
-    return jsonify({
-        'code': 0,
-        'msg': '購買成功',
-        'data': None,
-        'ts': time.time
-    })
+    return jsonify(code=0, msg='購買成功', data=None, ts=int(time.time()))
 
 @bp.route('/api/items', methods=['GET'])
-@require_oauth('profile')
+@require_oauth('access')
 def history():
     start_at = request.form.get('start_at')
     end_at = request.form.get('end_at')
@@ -168,9 +163,4 @@ def history():
             'buy_at': '1692816112'
         }
     ]
-    return jsonify({
-        'code': 0,
-        'msg': '購買成功',
-        'data': data,
-        'ts': time.time
-    })
+    return jsonify(code=0, msg='查詢成功', data=json.dumps(data), ts=int(time.time()))

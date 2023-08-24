@@ -1,14 +1,14 @@
 {% if user %}
 <style>pre{white-space:wrap}</style>
-<div>Logged in as <strong>{{user}}</strong> (<a href="{{ url_for('.logout') }}">Log Out</a>)</div>
+<div>登入者: <strong>{{user}}</strong> (<a href="{{ url_for('.logout') }}">登出</a>)</div>
 
 {% for client in clients %}
 <pre>
-<strong>Client Info</strong>
+<strong>應用資訊</strong>
   {%- for key in client.client_info %}
   <strong>{{ key }}: </strong>{{ client.client_info[key] }}
   {%- endfor %}
-<strong>Client Metadata</strong>
+<strong>應用資料</strong>
   {%- for key in client.client_metadata %}
   <strong>{{ key }}: </strong>{{ client.client_metadata[key] }}
   {%- endfor %}
@@ -16,11 +16,11 @@
 <hr>
 {% endfor %}
 
-<br><a href="{{ url_for('.create_client') }}">Create Client</a>
+<br><a href="{{ url_for('.create_client') }}">新增應用</a>
 
 {% else %}
 <form action="" method="post">
   <input type="text" name="username" placeholder="username">
-  <button type="submit">Login / Signup</button>
+  <button type="submit">登入/註冊</button>
 </form>
 {% endif %}

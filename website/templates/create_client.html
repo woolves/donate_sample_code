@@ -3,32 +3,32 @@
   label { margin: 15px 0; }
 </style>
 
-<a href="/">Home</a>
+<a href="/">首頁</a>
 
 <form action="" method="post">
   <label>
-    <span>Client Name</span>
-    <input type="text" name="client_name">
+    <span>應用名稱</span>
+    <input type="text" name="client_name" value="api">
   </label>
   <label>
-    <span>Client URI</span>
-    <input type="url" name="client_uri">
+    <span>應用 URI</span>
+    <input type="url" name="client_uri" value="http://127.0.0.1">
   </label>
   <label>
-    <span>Allowed Scope</span>
-    <input type="text" name="scope">
+    <span>作用範圍</span>
+    <input type="text" name="scope" value="access">
   </label>
   <label>
-    <span>Redirect URIs</span>
-    <textarea name="redirect_uri" cols="30" rows="10"></textarea>
+    <span>回調 URIs</span>
+    <textarea name="redirect_uri" cols="30" rows="10">http://127.0.0.1/callback</textarea>
   </label>
   <label>
-    <span>Allowed Grant Types</span>
-    <textarea name="grant_type" cols="30" rows="10"></textarea>
+    <span>允許請求類型</span>
+    <textarea name="grant_type" cols="30" rows="10">authorization_code</textarea>
   </label>
   <label>
-    <span>Allowed Response Types</span>
-    <textarea name="response_type" cols="30" rows="10"></textarea>
+    <span>允許響應類型</span>
+    <textarea name="response_type" cols="30" rows="10">code</textarea>
   </label>
   <label>
     <span>Token Endpoint Auth Method</span>
@@ -38,5 +38,5 @@
       <option value="none">none</option>
     </select>
   </label>
-  <button>Submit</button>
+  <button>送出</button>
 </form>

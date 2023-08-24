@@ -1,15 +1,15 @@
-<p>The application <strong>{{grant.client.client_name}}</strong> is requesting:
+<p>應用名稱 <strong>{{grant.client.client_name}}</strong> 正在請求授權:
 <strong>{{ grant.request.scope }}</strong>
 </p>
 
 <p>
-  from You - a.k.a. <strong>{{ user.username }}</strong>
+  來自 <strong>{{ user.username }}</strong> 的請求
 </p>
 
 <form action="" method="post">
   <label>
     <input type="checkbox" name="confirm">
-    <span>Consent?</span>
+    <span>正確?</span>
   </label>
   {% if not user %}
   <p>You haven't logged in. Log in with:</p>
@@ -18,5 +18,5 @@
   </div>
   {% endif %}
   <br>
-  <button>Submit</button>
+  <button>送出</button>
 </form>

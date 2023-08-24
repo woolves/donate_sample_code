@@ -40,18 +40,19 @@ $ flask run
 
 您可以在瀏覽器裡開啟下列網址，開始授權碼流程
 ```bash
-$ open http://127.0.0.1:5000/oauth/authorize?response_type=code&client_id=${client_id}&scope=profile
+$ open http://127.0.0.1:5000/oauth/authorize?response_type=code&client_id=${client_id}&scope=access
 ```
 
-認證之後，頁面將跳轉至 `${redirect_uri}/?code=${code}`。之後您可以通過取得的授權碼(code)訪問伺服器資源。
+認證之後，頁面將跳轉至 `${redirect_uri}/?code=${code}`。
 
+接著可以將取得的 code，向伺服器請求授權，並取得最終 access token。
 Then your app can send the code to the authorization server to get an access token:
 
 ```bash
-$ curl -u ${client_id}:${client_secret} -XPOST http://127.0.0.1:5000/oauth/token -F grant_type=authorization_code -F scope=profile -F code=${code}
+$ curl -u ${client_id}:${client_secret} -XPOST http://127.0.0.1:5000/oauth/token -F grant_type=authorization_code -F scope=access -F code=${code}
 ```
 
-現在你可以試著訪問 `/api/me`:
+現在你可以藉甲 access_token 訪問 `/api/me`:
 
 ```bash
 $ curl -H "Authorization: Bearer ${access_token}" http://127.0.0.1:5000/api/me
