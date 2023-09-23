@@ -123,8 +123,10 @@ def revoke_token():
 @bp.route('/api/me', methods=['GET'])
 @require_oauth('profile')
 def me():
-    user = current_token.user
-    return jsonify(id=user.id, username=user.username)
+    
+    # 查詢登入者資料
+
+    return jsonify(user_id='my_user_id', username='my_username', server_id='my_server_id')
 
 @bp.route('/api/items/buy', methods=['POST'])
 @require_oauth('buy')

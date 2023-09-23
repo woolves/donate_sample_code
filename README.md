@@ -40,15 +40,23 @@ $ flask run
 
 您可以在瀏覽器裡開啟下列網址，開始授權碼流程
 ```bash
-$ open http://127.0.0.1:5000/oauth/authorize?response_type=code&client_id=${client_id}&scope=profile buy buy_history
+$ open http://127.0.0.1:5000/oauth/authorize?response_type=code&client_id=${client_id}&scope=profile buy buy_history&state=unique_state_code
 ```
 
-認證之後，頁面將跳轉至 `${redirect_uri}/?code=${code}`。
+認證之後，頁面將跳轉至 `${redirect_uri}/?code=${code}&state=unique_state_code`。
 
 接著可以將取得的 code，向伺服器請求授權，並取得最終 access token。
 
 ```bash
 $ curl -u ${client_id}:${client_secret} -XPOST http://127.0.0.1:5000/oauth/token -F grant_type=authorization_code -F scope=profile buy buy_history -F code=${code}
+
+# 返回值
+{
+    "access_token": "VfmFVoBsWYIOPNY77f5gcivzVYixM1LHKZzZHLYRaL", 
+    "expires_in": 864000, 
+    "scope": "profile buy buy_history", 
+    "token_type": "Bearer"
+}
 ```
 
 現在你可以藉由 access_token 訪問 `/api/me`:
