@@ -64,3 +64,123 @@ $ curl -u ${client_id}:${client_secret} -XPOST http://127.0.0.1:5000/oauth/token
 ```bash
 $ curl -H "Authorization: Bearer ${access_token}" http://127.0.0.1:5000/api/me
 ```
+
+## 相關 API
+
+### OAuth 登入
+
+#### [POST] /oauth/authorize
+
+#### 請求參數:
+
+?client_id=my_client_id&response_type=code&scope=profile buy buy_history&state=my_state
+
+#### 返回值:
+
+登入 HTML
+
+### 取得 OAuth Token
+
+#### [POST] /oauth/token
+
+#### 請求參數:
+
+grant_type=authorization_code&scope=profile buy buy_history&code=my_authorize_code
+
+#### 返回值:
+```json
+{
+    "access_token": "VfmFVoBsWYIOPNY77f5gcivzVYixM1LHKZzZHLYRaL", 
+    "expires_in": 864000, 
+    "scope": "profile buy buy_history", 
+    "token_type": "Bearer"
+}
+```
+
+### 查看個人資料 
+
+#### [GET] /api/me
+
+#### 請求頭:
+
+Authorization: Bearer <my_access_token>
+
+#### 請求參數:
+
+#### 返回值:
+```json
+{
+    "code": 0, 
+    "success": true, 
+    "username": "my_username", 
+    "server_id": "my_server_id",
+    "msg": "查詢成功",
+    "ts": 1695613372,    
+}
+```
+
+### 購買品項
+
+#### [POST] /api/items/buy
+
+#### 請求頭:
+
+Authorization: Bearer <my_access_token>
+
+#### 請求參數:
+
+```json
+{
+    "item_id": "YOUR_ITEM_ID",
+    "tx_id": "MY_ORDER_ID",
+    "buy_at": "2023-09-01 13:22:22",
+}
+```
+
+#### 返回值:
+```json
+{
+    "code": 0,
+    "success": true,
+    "msg": "購買成功",
+    "ts": 1695613372
+}
+```
+
+### 購買記錄
+
+#### [GET] /api/orders
+
+#### 請求頭:
+
+Authorization: Bearer <my_access_token>
+
+#### 請求參數:
+
+#### 返回值:
+```json
+{
+    "code": 0, 
+    "success": true, 
+    "msg": "查詢成功",
+    "ts": 1695613372,
+    "orders": [
+        {
+            "tx_id": "20230901120000123456",
+            "item_id": "ITEM_001",
+            "item_name": "品項1",
+            "item_img_url": "https://img.example.com/img/item_001.png",
+            "amount": "100",
+            "buy_at": "1692805697"
+        },
+        {
+            "tx_id": "20230901120000233441",
+            "item_id": "ITEM_002",
+            "item_name": "品項2",
+            "item_img_url": "https://img.example.com/img/item_002.png",
+            "amount": "100",
+            "buy_at": "1692816112"
+        }
+    ]
+}
+```

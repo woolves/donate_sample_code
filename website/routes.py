@@ -125,8 +125,9 @@ def revoke_token():
 def me():
     
     # 查詢登入者資料
+    # success = true 表示查詢成功
 
-    return jsonify(user_id='my_user_id', username='my_username', server_id='my_server_id')
+    return jsonify(code=0, success=True,  msg='查詢成功', username='my_username', server_id='my_server_id')
 
 @bp.route('/api/items/buy', methods=['POST'])
 @require_oauth('buy')
@@ -136,16 +137,18 @@ def buy():
     buy_at = time.time
 
     # 購買品項羅輯
+    # success = true 表示購買成功
 
-    return jsonify(code=0, msg='購買成功', data=None, ts=int(time.time()))
+    return jsonify(code=0, success=True, msg='購買成功', data=None, ts=int(time.time()))
 
-@bp.route('/api/items', methods=['GET'])
+@bp.route('/api/orders', methods=['GET'])
 @require_oauth('buy_history')
 def history():
     start_at = request.form.get('start_at')
     end_at = request.form.get('end_at')
 
     # 查詢品項羅輯
+    # success = true 表示查詢成功
 
     data = [
         {
@@ -165,4 +168,4 @@ def history():
             'buy_at': '1692816112'
         }
     ]
-    return jsonify(code=0, msg='查詢成功', data=json.dumps(data), ts=int(time.time()))
+    return jsonify(code=0, success=True, msg='查詢成功', data=json.dumps(data), ts=int(time.time()))
