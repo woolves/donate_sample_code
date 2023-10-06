@@ -127,7 +127,7 @@ def me():
     # 查詢登入者資料
     # success = true 表示查詢成功
 
-    return jsonify(code=0, success=True,  msg='查詢成功', username='my_username', server_id='my_server_id')
+    return jsonify(code=0, success=True,  msg='查詢成功', username='my_username', name='my_name', server_id='my_server_id')
 
 @bp.route('/api/items/buy', methods=['POST'])
 @require_oauth('buy')

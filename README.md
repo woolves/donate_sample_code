@@ -112,6 +112,7 @@ Authorization: Bearer <my_access_token>
 {
     "code": 0, 
     "success": true, 
+    "name" : "my_name",
     "username": "my_username", 
     "server_id": "my_server_id",
     "msg": "查詢成功",
